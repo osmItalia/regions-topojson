@@ -5,26 +5,22 @@ Example with french regions : https://github.com/laem/regions-topojson/blob/mast
 
 Follow these steps to get them for other countries :
 
-Run this command...
-```
-wget www.overpass-api.de/api/interpreter --post-file=my.xml -O my.osm
-```
-
-...using this my.xml file. 
+create a file named my-country.xml. 
 
 Just change FR for DE to get german regions for example, and check http://wiki.openstreetmap.org/wiki/Tag:boundary%3Dadministrative to get the 'admin_level' that you need. 
 
 ```
 <osm-script timeout="1000">
   <!-- gather results -->
+
+  <id-query into="searchArea" ref="3600365331" type="area"/>
   <union>
-    <!-- query part for: “admin_level=2” -->
     <query type="relation">
-      <has-kv k="admin_level" v="4"/>
-      <has-kv k="ISO3166-2" regv="FR-"/>
-      
+      <has-kv k="admin_level" modv="" v="8"/>
+      <area-query from="searchArea" ref=""/>
     </query>
   </union>
+
   <!-- print results -->
   <print mode="body"/>
   <recurse type="down"/>
@@ -32,14 +28,12 @@ Just change FR for DE to get german regions for example, and check http://wiki.o
 </osm-script>
 ```
 
-Unfortunately, not all country regions on OSM are marked with the ISO3166-2 attribute. E.g. English regions will have to be retrieved using this query lines instead : 
-
+then run this command...
 ```
-<has-kv k="admin_level" v="5"/>
-<has-kv k="ref:nuts:1" regv="UK"/>
+wget www.overpass-api.de/api/interpreter --post-file=my-country.xml -O country.osm
 ```
 
-Then : 
+after waiting few minutes (depending on size), you will get one file from the API, proceed by installing: 
 
 ```
 npm install osmtogeojson
