@@ -42,7 +42,7 @@ osmtogeojson my.osm > MYREGIONS.geojson
 You can stop here and use geojson, but files will be huge. Simplify them with topojson :
 
 ```
-npm install topojson
+npm install -g topojson
 topojson -o lala.json MYREGIONS.geojson -q 10000 --simplify-proportion 0.02 -p
 ```
 
