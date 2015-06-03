@@ -30,7 +30,7 @@ Just change FR for DE to get german regions for example, and check http://wiki.o
 
 then run this command...
 ```
-wget www.overpass-api.de/api/interpreter --post-file=my-country.xml -O country.osm
+wget http://www.overpass-api.de/api/interpreter --post-file=my-country.xml -O country.osm
 ```
 
 after waiting few minutes (depending on size), you will get one file from the API, proceed by installing: 
